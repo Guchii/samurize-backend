@@ -20,5 +20,9 @@ def getPara(url : str):
 
     for i in para:
         output = query({"inputs" : i})
-        summary += output[0]['summary_text']
+        text = output[0]['summary_text'].replace("<n>Have a personal essay to share with the world .", " ")
+        text = output[0]['summary_text'].replace(".<n>Have a personal essay to share with the world .", " ")
+        text = output[0]['summary_text'].replace("<n>Have a personal essay to share with the U.S.", " ")
+        text = output[0]['summary_text'].replace("<n>Have a personal essay to share with the world .", " ")
+        summary += text
     return {soup.title.string : summary}
