@@ -22,5 +22,3 @@ def getPara(url : str):
         output = query({"inputs" : i})
         summary += output[0]['summary_text']
     return {soup.title.string : summary}
-
-print(getPara("https://en.wikipedia.org/wiki/Electron"))
