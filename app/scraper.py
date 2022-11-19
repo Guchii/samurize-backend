@@ -25,4 +25,4 @@ def getPara(url : str):
         text = output[0]['summary_text'].replace("<n>Have a personal essay to share with the U.S.", " ")
         text = output[0]['summary_text'].replace("<n>Have a personal essay to share with the world .", " ")
         summary += text
-    return {soup.title.string : summary}
+    return {"title" :soup.title.string,"body" : summary}
