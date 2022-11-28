@@ -1,16 +1,13 @@
-from fastapi import FastAPI, Request, Response, Body
-from slowapi.errors import RateLimitExceeded
-from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
-from .scraper import getPara
-from .schema import Payload
-from app import clean
-from .model import query
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 
-origins = [
-    "*",
-]
+from .model import query
+from .scraper import getPara
+
+origins = ["*"]
 
 
 limiter = Limiter(key_func=get_remote_address)
@@ -26,26 +23,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/home")
 @limiter.limit("15/minute")
 async def homepage(request: Request):
     return "test"
 
-@app.post("/generate")
-@limiter.limit("15/minute")
-async def homepage(request: Request):
-    print(await request.json())
-    import time
-    time.sleep(2)
-    return {"key": "value"}
 
 @app.get("/scraper/wiki")
-async def wikiscraper(url : str = "https://en.wikipedia.org/wiki/Electron"):
+async def wiki_scraper(url: str = "https://en.wikipedia.org/wiki/Electron"):
     dic = getPara(url)
     return dic
 
+
 @app.post("/gensum")
-async def generate_summary(paylaod):
-    body = paylaod
-    output = query({"inputs" : body})
+async def generate_summary(payload):
+    output = query({"inputs": payload})
     return output
