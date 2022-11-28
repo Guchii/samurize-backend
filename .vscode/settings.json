@@ -1,7 +1,12 @@
 {
     "cSpell.words": [
+        "dailymail",
         "fastapi",
+        "nltk",
+        "pretrained",
         "pydantic",
-        "slowapi"
+        "sents",
+        "slowapi",
+        "spacy"
     ]
 }

@@ -1,19 +1,12 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.errors import RateLimitExceeded
-from slowapi.util import get_remote_address
 
-from .model import query
-from .scraper import getPara
+from .logic import generate_summary, video_summary, wiki_summary
 
 origins = ["*"]
 
 
-limiter = Limiter(key_func=get_remote_address)
 app = FastAPI()
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,19 +17,24 @@ app.add_middleware(
 )
 
 
-@app.get("/home")
-@limiter.limit("15/minute")
-async def homepage(request: Request):
-    return "test"
+@app.get("/health")
+async def health():
+    return {"status": True}
 
 
-@app.get("/scraper/wiki")
-async def wiki_scraper(url: str = "https://en.wikipedia.org/wiki/Electron"):
-    dic = getPara(url)
-    return dic
+@app.post("/wiki-summarize")
+async def wiki_summarize(title: str = "Electron"):
+    summary = wiki_summary(title)
+    return {"title": title, "summary": summary}
 
 
 @app.post("/gensum")
-async def generate_summary(payload):
-    output = query({"inputs": payload})
-    return output
+async def generate_summaries(payload):
+    summary = generate_summary([payload])
+    return {"summary": summary}
+
+
+@app.post("/video-summarize")
+async def video_summarize(url: str):
+    summary = video_summary(url)
+    return {"url": url, "summary": summary}
