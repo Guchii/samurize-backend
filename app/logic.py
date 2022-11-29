@@ -1,7 +1,7 @@
 from typing import List
 
 import spacy
-import wikipedia
+import wikipediaapi
 from nltk.tokenize import BlanklineTokenizer
 from transformers import PegasusForConditionalGeneration, PegasusTokenizer
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -10,6 +10,7 @@ nlp = spacy.load("en_core_web_sm")
 
 path = "./data"  # 'google/pegasus-cnn_dailymail'
 tokenizer = PegasusTokenizer.from_pretrained(path)
+wiki_wiki = wikipediaapi.Wikipedia("en")
 text_model = PegasusForConditionalGeneration.from_pretrained(path)
 
 
@@ -56,8 +57,8 @@ def video_summary(url: str):
 
 
 def wiki_summary(title: str):
-    wk = wikipedia.page(title)
-    content = wk.content.splitlines()[:3]
+    wk = wiki_wiki.page(title=title)
+    content = wk.text.splitlines()[:3]
     return generate_summary(content)
 
 

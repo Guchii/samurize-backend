@@ -1740,16 +1740,15 @@ python-versions = ">=3.7"
 test = ["pytest (>=3.0.0)"]
 
 [[package]]
-name = "wikipedia"
-version = "1.4.0"
-description = "Wikipedia API for Python"
+name = "wikipedia-api"
+version = "0.5.4"
+description = "Python Wrapper for Wikipedia"
 category = "main"
 optional = false
 python-versions = "*"
 
 [package.dependencies]
-beautifulsoup4 = "*"
-requests = ">=2.0.0,<3.0.0"
+requests = "*"
 
 [[package]]
 name = "youtube-transcript-api"
@@ -1765,7 +1764,7 @@ requests = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "ee473a8d92df939d3d8aee9deb81eb562c9285dcaac3542fe4116927b56bc308"
+content-hash = "1b0edb949bfb5232a9c0fbd80b4e2748c214b4e55f0d6eb3aff9cea9f20a364d"
 
 [metadata.files]
 anyio = [
@@ -3014,8 +3013,8 @@ wheel = [
     {file = "wheel-0.38.4-py3-none-any.whl", hash = "sha256:b60533f3f5d530e971d6737ca6d58681ee434818fab630c83a734bb10c083ce8"},
     {file = "wheel-0.38.4.tar.gz", hash = "sha256:965f5259b566725405b05e7cf774052044b1ed30119b5d586b2703aafe8719ac"},
 ]
-wikipedia = [
-    {file = "wikipedia-1.4.0.tar.gz", hash = "sha256:db0fad1829fdd441b1852306e9856398204dc0786d2996dd2e0c8bb8e26133b2"},
+wikipedia-api = [
+    {file = "Wikipedia-API-0.5.4.tar.gz", hash = "sha256:5173d4db641cdb78d96f2b052df2232bcdc00cf32a424c43402958a40f783992"},
 ]
 youtube-transcript-api = [
     {file = "youtube_transcript_api-0.5.0-py3-none-any.whl", hash = "sha256:e9ecbb663a0cabbe57424971298d52f764b607fab7318dd51ac545004b6fd06c"},

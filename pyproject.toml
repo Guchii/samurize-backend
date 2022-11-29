@@ -15,7 +15,7 @@ nltk = "^3.7"
 spacy = "^3.4.3"
 torch = "^1.13.0"
 fastapi = "^0.88.0"
-wikipedia = "^1.4.0"
+wikipedia-api = "^0.5.4"
 
 
 [tool.poetry.group.dev.dependencies]
